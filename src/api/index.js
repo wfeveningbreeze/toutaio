@@ -39,3 +39,18 @@ export const reportArticleAPI = (target, type) => {
     // }
   );
 };
+
+// 获取所有频道数据的 API
+export const getAllChannelAPI = () => {
+  return mockRequest.get("/channels");
+};
+
+// 更新用户频道列表数据的 API
+// 注意：形参 channels 是一个数组，格式： [ {id, seq} ]
+export const updateUserChannelAPI = (channels) => {
+  return mockRequest.put( "/channels",
+    //  {
+    //   channels
+    // }
+  );
+};

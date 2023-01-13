@@ -1,0 +1,23 @@
+{
+    "message": "OK",
+    "data": {
+        "channels": [
+            {
+                "id": 2,
+                "name": "开发者资讯"
+            },
+            {
+                "id": 3,
+                "name": "ios"
+            },
+            {
+                "id": 4,
+                "name": "c++"
+            },
+            {
+                "id": 5,
+                "name": "android"
+            }
+        ]
+    }
+}

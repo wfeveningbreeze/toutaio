@@ -8,6 +8,7 @@ import channels from "./channels.json";
 import articles from "./articles.json";
 import dislikes from "./dislikes.json";
 import reports from "./reports.json";
+import allChannels from "./allChannels.json";
 
 // 接口:相当于nodejs里面的中间件
 // 第一个参数: 接口的地址  第二个参数:向这个接口发请求获取数据
@@ -17,3 +18,4 @@ Mock.mock("/mock/channels", { code: 200, data: channels });
 Mock.mock("/mock/articles", { code: 200, data: articles });
 Mock.mock("/mock/dislikes", { code: 200, data: dislikes });
 Mock.mock("/mock/reports", { code: 200, data: reports });
+Mock.mock("/mock/allChannels", { code: 200, data: allChannels });
