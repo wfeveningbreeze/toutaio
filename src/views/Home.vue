@@ -16,17 +16,24 @@
     <!-- 为 <van-tabs> 组件添加 sticky 属性，即可在页面纵向滚动时，实现频道列表的吸顶效果： -->
     <!-- 为 <van-tabs> 组件添加 offset-top 属性，即可设置吸顶的距离： -->
     <van-tabs v-model="active" sticky offset-top="1.22666667rem">
-      <van-tab title="标签 1">内容 1</van-tab>
+      <!-- <van-tab title="标签 1">内容 1</van-tab>
       <van-tab title="标签 2">内容 2</van-tab>
       <van-tab title="标签 3">内容 3</van-tab>
       <van-tab title="标签 4">内容 4</van-tab>
       <van-tab title="标签 5">内容 5</van-tab>
       <van-tab title="标签 6">内容 6</van-tab>
       <van-tab title="标签 7">内容 7</van-tab>
-      <van-tab title="标签 8">内容 8</van-tab>
-       <!-- 循环渲染用户的频道 -->
-  <!-- <van-tab v-for="item in userChannel" :key="item.id" :title="item.name">{{item.name}}</van-tab> -->
+      <van-tab title="标签 8">内容 8</van-tab> -->
+      <!-- 循环渲染用户的频道 -->
+      <van-tab v-for="item in userChannel" :key="item.id" :title="item.name">
+        {{ item.name }}
+        <!-- 在每一个用户频道下，渲染出对应的“文章列表组件” -->
+        <!-- <art-list></art-list> -->
+        <!-- 注意：Vue 官方建议在绑定 props 时，把“小驼峰”的属性名，改造成“短横线”的形式使用 -->
+        <art-list :channel-id="item.id"></art-list>
+      </van-tab>
     </van-tabs>
+
     <!-- 频道管理的小图标 -->
     <van-icon name="plus" size="16" class="plus" />
   </div>
@@ -34,7 +41,9 @@
 
 <script>
 // 按需导入 API 接口
-import { getUserChannelAPI } from '@/api/index.js'
+import { getUserChannelAPI } from "@/api/index.js";
+// 导入子组件ArtList
+import ArtList from "@/views/ArtList.vue";
 
 export default {
   name: "home",
@@ -43,25 +52,31 @@ export default {
       // 标签页激活项的索引
       active: 0,
       // 用户的频道列表数组
-    userChannel: []
+      userChannel: [],
     };
+  },
+  components: {
+    ArtList,
   },
   created() {
     // 页面挂载,获取频道的数据
-  this.initUserChannel()
-},
-  methods:{
+    this.initUserChannel();
+  },
+  methods: {
     // 初始化频道列表数据
     async initUserChannel() {
-    // 1. 调用 API 接口
-    const { data: res } = await getUserChannelAPI()
-    // 2. 判断请求是否成功
-    if (res.message === 'OK') {
-      // 3. 为用户的频道列表赋值
-      this.userChannel = res.data.channels
-    }
-  }
-  }
+      // 1. 调用 API 接口
+      const { data: res } = await getUserChannelAPI();
+      // console.log(res);
+      // // 2. 判断请求是否成功
+      if (res.code === 200) {
+        const result = res.data[0].data.channels;
+        console.log(result);
+        // 3. 为用户的频道列表赋值
+        this.userChannel = result;
+      }
+    },
+  },
 };
 </script >
 

@@ -46,21 +46,26 @@ export default {
   },
   methods: {
     async onSubmit(values) {
-      console.log("submit", values);
+      // console.log("submit", values);
       // 注意:这个values是一个对象,里面收集了用户名和密码.{用户的手机号: 'admin', 登录的密码: '666666'}
       // 调用接口发请求, 把用户的信息发给服务器
 
       // 只有当表单数据校验通过之后，才会调用此 login 函数
-      // const res = await reqLogin(this.form);
-      // 当数据请求成功之后，res.data 中存储的就是服务器响应回来的数据
+      // const res = await reqLogin();
+      // // 当数据请求成功之后，res.data 中存储的就是服务器响应回来的数据
       // console.log(res);
       const { data: res } = await reqLogin(this.form);
-      console.log(res);
-      // 判断是否登录成功了
-      if (res.message === "OK") {
+      const { data } = res;
+      // console.log(res);
+      const result = data[0].data;
+      // console.log(result);
+      // // 判断是否登录成功了
+      if (res.code === 200) {
         // TODO1：把登录成功的结果，存储到 vuex 中
-        this.$store.commit('setToken',res.token)
+        // console.log(this.$store);
+        this.$store.commit('setToken',result.token)
         // TODO2：登录成功后，跳转到主页
+        // console.log(this.$router);
         this.$router.push('/home')
       }
     },

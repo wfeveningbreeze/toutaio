@@ -7,6 +7,7 @@ module.exports = defineConfig({
     proxy: {
       '/api': {
         target: 'http://www.liulongbin.top:8000',
+        // target: 'http://localhost:8080/',
         // pathRewrite: { '^/api': '' },
       },
     },

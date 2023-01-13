@@ -1,0 +1,9 @@
+[
+    {
+        "message": "OK",
+        "data": {
+            "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTU1NjQ5OTMsInVzZXJfaWQiOjExNTM1OTA4MjkyMzU4MzA3ODQsInJlZnJlc2giOmZhbHNlfQ.gDkSz7xdZAdW7Mt4fwSTtL-EtHjihSnz_hTW4Xg72lk",
+            "refresh_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTY3NjczOTMsInVzZXJfaWQiOjExNTM1OTA4MjkyMzU4MzA3ODQsInJlZnJlc2giOnRydWV9.3X0lgxzXxAvRgg0z8h9wibfpzaoWtFFhtSKt3WZGOe4"
+        }
+    }
+]

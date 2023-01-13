@@ -1,5 +1,5 @@
 <template>
-  <div> <p>App 根组件</p>
+  <div>
   
   <!-- 一级路由出口 --> <!-- 路由占位符 -->
   <router-view></router-view>
