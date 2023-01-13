@@ -19,8 +19,7 @@ Vue.use(List);
 import 'amfe-flexible'
 // 引入vuex
 import  store from  '@/store/index.js'
-//引入mockServe文件,让咱们模拟接口跑起来
-import "@/mock/mockSever.js";
+
 
 // 导入 dayjs 的核心模块
 import dayjs from 'dayjs'
@@ -49,6 +48,8 @@ Vue.use(Lazyload, {
   lazyComponent: true,
 });
 
+//引入mockServe文件,让咱们模拟接口跑起来
+import "@/mock/mockSever.js";
 // 关闭生产提示
 Vue.config.productionTip = false
 

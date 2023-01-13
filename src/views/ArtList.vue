@@ -5,10 +5,7 @@
     <!-- <art-item v-for="item in artlist" :key="item.art_id"></art-item> -->
     <!-- List 组件可以与 PullRefresh 组件结合使用，实现下拉刷新的效果。 -->
     <!-- 没有更多数据时，禁用下拉刷新的效果： :disabled="finished" -->
-    <van-pull-refresh
-      v-model="refreshing"
-      @refresh="onRefresh"
-    >
+    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <!-- 循环渲染文章的列表 -->
       <van-list
         v-model="loading"
@@ -21,6 +18,7 @@
           v-for="(item, index) in artlist"
           :key="index"
           :article="item"
+          @remove-article="removeArticle"
         ></art-item>
       </van-list>
     </van-pull-refresh>
@@ -113,6 +111,18 @@ export default {
       // 将 loading 设置为 true，表示处于加载状态
       this.loading = true;
       this.initArtList(true);
+    },
+    // 从文章列表中移除指定 id 的文章
+    removeArticle(id) {
+      // 对原数组进行 filter 方法的过滤
+      this.artlist = this.artlist.filter(
+        (item) => item.art_id.toString() !== id
+      );
+      // 2. 判断剩余数据的文章数量是否小于 10
+      if (this.artlist.length < 10) {
+        // 主动请求下一页的数据
+        this.initArtList();
+      }
     },
   },
 };
