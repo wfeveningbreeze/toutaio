@@ -14,6 +14,7 @@ import search from "./search.json";
 import articlesdetail from "./articlesdetail.json";
 import followings from "./followings.json";
 import likings from "./likings.json";
+import comments from "./comments.json";
 
 // 接口:相当于nodejs里面的中间件
 // 第一个参数: 接口的地址  第二个参数:向这个接口发请求获取数据
@@ -29,3 +30,4 @@ Mock.mock("/mock/search", { code: 200, data: search });
 Mock.mock("/mock/articlesdetail", { code: 200, data: articlesdetail });
 Mock.mock("/mock/followings", { code: 200, data: followings });
 Mock.mock("/mock/likings", { code: 200, data: likings });
+Mock.mock("/mock/comments", { code: 200, data: comments });
