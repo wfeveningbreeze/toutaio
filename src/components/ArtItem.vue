@@ -1,5 +1,6 @@
 <template>
-  <div>
+<!-- 利用事件委托 -->
+  <div  @click="$router.push('/article/' + artId)">
     <!-- 文章的信息 -->
     <van-cell>
       <!-- 标题区域的插槽 -->

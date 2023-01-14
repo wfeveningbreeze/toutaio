@@ -1,0 +1,17 @@
+{
+    "message": "OK",
+    "data": {
+      "art_id": 1329411937808679000,
+      "title": "我发布的文章标题",
+      "pubdate": "2020-11-19T21:11:20",
+      "content": "<p>文章的内容~~~</p>",
+      "aut_id": 1316345987983212500,
+      "ch_id": 17,
+      "aut_name": "光头强3号",
+      "aut_photo": "http://toutiao-img.itheima.net/FiY5FIv-uqm_E-EUnghpYustqEs4",
+      "is_followed": false,
+      "attitude": -1,
+      "is_collected": false,
+      "recomments": []
+    }
+  }

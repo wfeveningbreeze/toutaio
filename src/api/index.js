@@ -76,3 +76,44 @@ export const getSearchResultAPI = (kw, page) => {
     // }
   })
 }
+
+
+// 获取文章详情的 API（形参中的 id 是文章的 id）
+export const getArticleDetailAPI = id => {
+  // return mockRequest.get(`/articles/${id}`)
+  return mockRequest.get('/articlesdetail')
+}
+
+
+// 关注用户的 API（形参中的 userId 是文字作者的 id）
+export const followUserAPI = userId => {
+  return mockRequest.post('/followings',
+  //  {
+  //   target: userId
+  // }
+  )
+}
+
+
+// 取消关注用户的 API
+export const unfollowUserAPI = userId => {
+  // return mockRequest.delete(`/v1_0/user/followings/${userId}`)
+  return mockRequest.delete('/followings')
+}
+
+
+// 点赞的 API（形参中的 artId 是文章的 Id）
+export const addLikeAPI = artId => {
+  return mockRequest.post('/likings', 
+  // {
+  //   target: artId
+  // }
+  )
+}
+
+
+// 取消点赞的 API（形参中的 artId 是文章的 Id）
+export const delLikeAPI = artId => {
+  // return mockRequest.delete(`/v1_0/article/likings/${artId}`)
+  return mockRequest.delete(`/likings`)
+}
