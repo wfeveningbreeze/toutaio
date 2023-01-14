@@ -1,0 +1,21 @@
+[
+    {
+        "message": "OK",
+        "data": {
+            "id": 1153590829235830784,
+            "name": "猛虎下山",
+            "photo": "http://toutiao-img.itheima.net/Ft7RjIMyZd0a2y6xu1m-polLxA8R",
+            "mobile": "13888888888",
+            "gender": 1,
+            "birthday": "1992-03-28"
+        }
+    },
+    {
+        "message": "OK",
+        "data": {
+            "id": 1153590829235830784,
+            "name": "zs",
+            "birthday": "1992-02-25"
+        }
+    }
+]

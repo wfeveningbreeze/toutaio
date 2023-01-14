@@ -10,6 +10,7 @@ import  User from '@/views/User'
 import  Search from '@/views/Search'
 import  SearchResult from '@/views/SearchResult'
 import  ArticleDetail from '@/views/ArticleDetail'
+import  UserEdit from '@/views/UserEdit'
 
 // 清空路由规则
 export  default   [
@@ -25,6 +26,8 @@ export  default   [
       {path:'/search/:kw?',name: 'search-result',component:SearchResult, props: true},
        // 文章详情的路由规则
       {path:'/article/:id?',name:  'art-detail' ,component:ArticleDetail, props: true},
+       // 编辑用户资料的路由规则
+      {path:'/useredit',name:  'user-edit' ,component:UserEdit, props: true},
     ]
   },
   
