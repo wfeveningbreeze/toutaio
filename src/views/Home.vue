@@ -8,7 +8,8 @@
       </template>
       <!-- 右侧的插槽 -->
       <template #right>
-        <van-icon name="search" color="white" size="18" />
+        <!-- <van-icon name="search" color="white" size="18" /> -->
+        <van-icon name="search" color="white" size="18" @click="$router.push('/search')" />
       </template>
     </van-nav-bar>
 
@@ -37,7 +38,13 @@
     <!-- 频道管理的小图标 -->
     <!-- 在点击频道管理的小图标时，将 show 设置为 true，从而展示出频道管理的弹出层： -->
     <!-- 监听 <van-popup> 弹出层关闭完成时的 closed 事件，直接将 isDel 设置为 false 即可： -->
-    <van-icon name="plus" size="16" class="plus" @click="show = true"   @closed="isDel = false"/>
+    <van-icon
+      name="plus"
+      size="16"
+      class="plus"
+      @click="show = true"
+      @closed="isDel = false"
+    />
 
     <!-- 频道管理的弹出层 -->
     <!-- 为 <van-popup> 组件绑定 :close-on-click-overlay="false" 属性，从而防止点击遮罩层时，弹出层自动关闭的效果： -->
@@ -91,12 +98,17 @@
             </van-row> -->
             <!-- 我的频道列表 -->
             <van-row type="flex">
-               <!-- 1. 在进行 v-for 循环时，接收索引 index -->
-            <van-col span="6" v-for="(item, index) in userChannel" :key="item.id">
+              <!-- 1. 在进行 v-for 循环时，接收索引 index -->
+              <van-col
+                span="6"
+                v-for="(item, index) in userChannel"
+                :key="item.id"
+              >
                 <!-- 用户的频道 Item 项 -->
-                 <!-- 2. 点击用户频道的 Item 项时，将索引 index 作为参数，传递给 onUserChannelClick 方法 -->
+                <!-- 2. 点击用户频道的 Item 项时，将索引 index 作为参数，传递给 onUserChannelClick 方法 -->
                 <div
-                 class="channel-item van-hairline--surround" @click="onUserChannelClick(item, index)"
+                  class="channel-item van-hairline--surround"
+                  @click="onUserChannelClick(item, index)"
                 >
                   {{ item.name }}
                   <!-- 删除的图标 -->
@@ -266,17 +278,24 @@ export default {
       }
     },
     // 从用户频道列表中，移除指定 id 的频道
-    onUserChannelClick(channel) {
+    onUserChannelClick(channel, index) {
       if (this.isDel) {
         // 处于删除状态
-        // TODO1：从 userChannel 中移除指定的频道
+
+        if (channel.name === "推荐" || this.userChannel.length === 2) return;
+        // 进行数组的过滤
         this.userChannel = this.userChannel.filter(
           (item) => item.id !== channel.id
         );
-        // TODO2：将更改过后的用户频道数据，提交到服务器保存
+        // 将更改过后的用户频道数据，提交到服务器保存
         this.updateChannel();
       } else {
         // 不处于删除状态
+
+        // 1. 修改 Tabs 的激活项的索引值
+        this.active = index;
+        // 2. 关闭 popup 弹出层
+        this.show = false;
       }
     },
     // 从用户频道列表中，移除指定 id 的频道
