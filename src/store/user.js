@@ -39,6 +39,7 @@ const mutations = {
     // 清空用户的简介信息
     state.userProfile = {};
     // 2. 清空本地的数据
+    localStorage.removeItem('token')
     localStorage.removeItem("userInfo");
     localStorage.removeItem("userProfile");
   },
@@ -57,7 +58,7 @@ const actions = {
     const { data: res } = await getUserInfoAPI();
     // console.log(res);
     const result = res.data[1].data;
-    console.log(result);
+    // console.log(result);
     if (res.code === 200) {
       // TODO：把数据转交给 Mutation 方法   ctx.commit('Mutation方法名')
       ctx.commit("updateUserInfo", result);
@@ -75,6 +76,7 @@ const actions = {
       ctx.commit("updateUserProfile", result);
     }
   },
+
 };
 const getters = {
    // 用户头像的计算属性
