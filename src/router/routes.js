@@ -11,6 +11,7 @@ import  Search from '@/views/Search'
 import  SearchResult from '@/views/SearchResult'
 import  ArticleDetail from '@/views/ArticleDetail'
 import  UserEdit from '@/views/UserEdit'
+import  Chat from '@/views/Chat'
 
 // 清空路由规则
 export  default   [
@@ -28,6 +29,8 @@ export  default   [
       {path:'/article/:id?',name:  'art-detail' ,component:ArticleDetail, props: true},
        // 编辑用户资料的路由规则
       {path:'/useredit',name:  'user-edit' ,component:UserEdit, props: true},
+       // 小思聊天的路由规则
+      {path:'/chat',name:  'chat' ,component:Chat, props: true},
     ]
   },
   

@@ -20,6 +20,10 @@
             @click="$refs.fileRef.click()"
           />
           <!-- 文件选择框 -->
+          <!-- 注意:input框中的type="file", 有默认的click函数,
+          我们通过 @click="$refs.fileRef.click()"去调用这个函数就行,相当于点击了input框,打开选择文件窗口,选中文件后,
+          触发change事件,这里绑定的是onFileChange函数
+           -->
           <input
             type="file"
             accept="image/*"
@@ -243,6 +247,7 @@ export default {
       const { data: res } = await updateUserAvatarAPI(fd);
       //   console.log(res);
       if (res.code === 200) {
+          console.log(1111);
         // 2.1 更新用户的简介信息
         this.initUserProfile();
         // 2.2 提示用户更新成功
