@@ -21,12 +21,12 @@ export  default   [
     component:Main,
     redirect: '/home',
     children:[
-      {path:'home',name: 'home',component:Home},
+      {path:'home',name: 'home',component:Home,meta: { isRecord: true, top: 0 }},
       {path:'user',name: 'user',component:User},
       {path:'/search',name: 'search',component:Search},
-      {path:'/search/:kw?',name: 'search-result',component:SearchResult, props: true},
+      {path:'/search/:kw?',name: 'search-result',component:SearchResult, props: true,meta: { isRecord: true, top: 0 }},
        // 文章详情的路由规则
-      {path:'/article/:id?',name:  'art-detail' ,component:ArticleDetail, props: true},
+      {path:'/article/:id?',name:  'art-detail' ,component:ArticleDetail, props: true,  meta: { isRecord: true, top: 0 } },
        // 编辑用户资料的路由规则
       {path:'/useredit',name:  'user-edit' ,component:UserEdit, props: true},
        // 小思聊天的路由规则

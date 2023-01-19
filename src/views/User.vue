@@ -49,8 +49,14 @@ import { mapActions, mapState } from "vuex";
 export default {
   name: "User",
   created() {
-    this.initUserInfo();
+     // 把下面这一行注释掉，因为 activated 在组件首次加载时也会调用一次
+  // this.initUserInfo()
   },
+  // 被激活了
+activated() {
+  // 只要组件被激活了，就重新初始化用户的信息
+  this.initUserInfo()
+},
   computed: {
     // 从 vuex 中把指定名称的 State 数据映射到组件中使用
     ...mapState({

@@ -55,6 +55,12 @@ export default {
   created() {
     this.initSearchList();
   },
+  beforeRouteLeave(to, from, next) {
+  from.meta.top = window.scrollY
+  setTimeout(() => {
+    next()
+  }, 0)
+},
   methods: {
     // 触发了上拉加载更多
     onLoad() {
@@ -85,6 +91,18 @@ export default {
       }
     },
   },
+  watch: {
+  kw() {
+    // 1. 重置关键数据
+    this.page = 1
+    this.artList = []
+    this.loading = false
+    this.finished = false
+    
+    // 2. 请求数据
+    this.initSearchResult()
+  }
+},
 };
 </script>
 

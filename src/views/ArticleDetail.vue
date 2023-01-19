@@ -132,6 +132,9 @@ import {
 // 导入文章的评论组件
 import ArtCmt from "@/components/ArtCmt.vue";
 
+// 导入 highlight.js 模块
+import hljs from 'highlight.js'
+
 export default {
   name: "ArticleDetail",
   // props 中的 id 是文章的 id（已经调用了大数的 .toString() 方法）
@@ -145,6 +148,20 @@ export default {
   created() {
     this.initArticle();
   },
+  beforeRouteLeave(to, from, next) {
+  from.meta.top = window.scrollY
+  setTimeout(() => {
+    next()
+  }, 0)
+},
+// 1. 当组件的 DOM 更新完毕之后
+updated() {
+  // 2. 判断是否有文章的内容
+  if (this.article) {
+    // 3. 对文章的内容进行高亮处理
+    hljs.highlightAll()
+  }
+},
   components: {
        // 注册文章评论组件
     ArtCmt,
@@ -219,6 +236,14 @@ export default {
       }
     },
   },
+  watch: {
+  id() {
+    // 只要 id 值发生了变化，就清空旧的文章信息
+    this.article = null
+    // 并重新获取文章的详情数据
+    this.initArticleInfo()
+  }
+},
 };
 </script>
 

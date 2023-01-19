@@ -16,7 +16,7 @@
     <!-- 频道列表的标签页 -->
     <!-- 为 <van-tabs> 组件添加 sticky 属性，即可在页面纵向滚动时，实现频道列表的吸顶效果： -->
     <!-- 为 <van-tabs> 组件添加 offset-top 属性，即可设置吸顶的距离： -->
-    <van-tabs v-model="active" sticky offset-top="1.22666667rem">
+    <van-tabs v-model="active" sticky offset-top="1.22666667rem" :before-change="beforeTabsChange"  @change="onTabsChange">
       <!-- <van-tab title="标签 1">内容 1</van-tab>
       <van-tab title="标签 2">内容 2</van-tab>
       <van-tab title="标签 3">内容 3</van-tab>
@@ -183,6 +183,9 @@ import {
 // 导入子组件ArtList
 import ArtList from "@/views/ArtList.vue";
 
+// “频道名称”和“滚动条位置”之间的对应关系，格式 { '推荐': 211, 'html': 30, '开发者资讯': 890 }
+const nameToTop = {}
+
 export default {
   name: "home",
   data() {
@@ -199,6 +202,12 @@ export default {
       isDel: false,
     };
   },
+  // 导航离开该组件的对应路由时调用
+// 可以访问组件实例 `this`
+beforeRouteLeave(to, from, next) {
+  from.meta.top = window.scrollY
+  next()
+},
   components: {
     ArtList,
   },
@@ -315,6 +324,23 @@ export default {
         // 不处于删除状态
       }
     },
+    // tabs 发生切换之前，触发此方法
+beforeTabsChange() {
+  // 把当前"频道名称"对应的"滚动条位置"记录到 nameToTop 对象中
+  const name = this.channels[this.active].name
+  nameToTop[name] = window.scrollY
+
+  // return true 表示允许进行标签页的切换
+  return true
+},
+// 当 tabs 切换完毕之后，触发此方法
+onTabsChange() {
+  // 等 DOM 更新完毕之后，根据记录的"滚动条位置"，调用 window.scrollTo() 方法进行滚动
+  this.$nextTick(() => {
+    const name = this.channels[this.active].name
+    window.scrollTo(0, nameToTop[name] || 0)
+  })
+}
   },
 };
 </script >
