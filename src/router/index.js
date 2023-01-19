@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import   store  from  '@/store/index'
+
 Vue.use(VueRouter)
 
 //引入路由相关的配置项
@@ -41,5 +43,38 @@ VueRouter.prototype.replace = function (location, resolve, reject) {
 const router = new VueRouter({
   routes
 })
+
+// 所有有权限页面的路径，都在这个数组之中
+const pagePathArr = ['/user', '/user/edit']
+
+// 2. 为路由的实例对象挂载全局前置守卫
+router.beforeEach((to, from, next) => {
+    // if (to.path === '/user' || to.path === '/user/edit') {
+    //   // 2.1 访问的是有权限的页面，需要判断用户是否登录
+    //   next()
+    // } else {
+    //   // 2.2 访问的是没有权限的页面
+    //   next()
+    // }
+    if (pagePathArr.indexOf(to.path) !== -1) {
+        // 访问的是有权限的页面，需要判断用户是否登录,如果有token值,则表示用户已经登录了
+         // 1. 从 store 中获取 token 的值
+         const tokenStr = store.state.user.token
+         console.log(tokenStr);
+         if (tokenStr) {
+            // 1.1 token 有值，已登录过（操作：直接放行）
+            next()
+          } else {
+            // 1.2 token 不存在，没有登录（操作：强制跳转到登录页）
+            // next('/login')
+            // now：没有登录，强制跳转到登录页，并携带路由的 "query 查询参数"
+         next(`/login?pre=${to.fullPath}`)
+          }
+      } else {
+        // 访问的是没有权限的页面
+        next()
+      }
+
+  })
 
 export default router

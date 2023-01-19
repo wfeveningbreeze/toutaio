@@ -66,7 +66,10 @@ export default {
         this.$store.commit('setToken',result.token)
         // TODO2：登录成功后，跳转到主页
         // console.log(this.$router);
-        this.$router.push('/home')
+        // this.$router.push('/home')
+          // 2. 要跳转到首页  跳转到上次访问未遂的路由地址
+    const navPath = this.$route.query.pre || '/'
+    this.$router.replace(navPath)
       }
     },
   },
